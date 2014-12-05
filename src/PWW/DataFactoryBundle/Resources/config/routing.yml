@@ -1,0 +1,14 @@
+grouped:
+    resource: "@PWWDataFactoryBundle/Controller/GroupedRESTController.php"
+    prefix:   /
+    type: rest
+    
+processed:
+    resource: "@PWWDataFactoryBundle/Controller/ProcessedRESTController.php"
+    prefix:   /
+    type: rest
+    
+config:
+    resource: "@PWWDataFactoryBundle/Controller/ConfigRESTController.php"
+    prefix:   /
+    type: rest

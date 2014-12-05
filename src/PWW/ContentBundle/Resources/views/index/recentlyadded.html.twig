@@ -1,0 +1,19 @@
+{% if xml is defined and xml|length > 0 %}
+    <div class='dashboard-recent-media-row'>
+        <ul class='dashboard-recent-media'>
+            <div class='dashboard-recent-media-instance'>
+                {% for item in xml %}
+                    <li>
+                        <div class='poster'><div class='poster-face'><a href='info/{{ item.ratingKey }}'><img src="img?img={{ item.recentThumbUrl|e }}" class="poster-face"></div></div>
+                        <div class=dashboard-recent-media-metacontainer>
+                            <h3>{{ item.title }}</h3>
+                            <h4>Added {{ item.addedAt|time_ago_in_words }}</h4>
+                        </div>
+                    </li>
+                {% endfor %}
+            </div>
+        </ul>
+    </div>
+{% else %}
+    <h5><strong>There are no recent items.</strong></h5><br>
+{% endif %}

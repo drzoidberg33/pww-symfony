@@ -1,0 +1,95 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class='container-fluid'>
+        <div class='row-fluid'>
+            <div class='span12'>
+                <div class='user-info-wrapper'>
+                    {% if userInfo.thumb == '' %}
+                        <div class='user-info-poster-face'>
+                            <img src='{{ asset('bundles/pwwcontent/images/gravatar-default-80x80.png') }}'>
+                        </div>
+                    {% else %}
+                        <div class='user-info-poster-face'>
+                            <img src='{{ userInfo.thumb }}' onerror=\"this.src='{{ asset('bundles/pwwcontent/images/gravatar-default-80x80.png') }}'\">
+                        </div>
+                    {% endif %}
+                    <div class='user-info-username'>{{ userInfo.title }}</div>
+                    <div class='user-info-nav'>
+                        <ul class='user-info-nav'>
+                            <li class='active'><a href='#profile' data-toggle='tab'>Profile</a></li>
+                            <li><a id='ip-tab-btn' href='#userAddresses' data-toggle='tab'>IP Addresses</a></li>
+                            <li><a href='#userHistory' data-toggle='tab'>History</a></li>
+                        </ul>
+                    </div>			
+                </div>		
+            </div>		
+        </div>
+    </div>
+    
+    <div class='tab-content'>
+            
+        <div class='tab-pane active' id='profile'>
+            <div class='container-fluid'>	
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        <div class='wellbg'>
+                            <div class='wellheader'>
+                                <div class='dashboard-wellheader'>
+                                    <h3>Global Stats</h3>
+                                </div>
+                            </div>
+                            <div id='user-time-stats' class='user-overview-stats-wrapper'>
+                                {{ include(
+                                    'PWWContentBundle:user:playstats.html.twig',
+                                    { 'stats': stats }
+                                ) }}
+                            </div>
+                        </div>
+                    </div>	
+                </div>		
+            </div>	
+
+            <div class='container-fluid'>
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        <div class='wellbg'>
+                            <div class='wellheader'>
+                                <div class='dashboard-wellheader'>
+                                    <h3>Platform Stats</h3>
+                                </div>
+                            </div>
+                            <div id='user-platform-stats' class='user-platforms'>
+                                {{ include(
+                                    'PWWContentBundle:user:platformstats.html.twig',
+                                    { 'platformStats': platformStats }
+                                ) }}
+                            </div>
+                        </div>
+                    </div>	
+                </div>		
+            </div>
+
+            <div class='container-fluid'>	
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        <div class='wellbg'>
+                            <div class='wellheader'>
+                                <div class='dashboard-wellheader'>
+                                    <h3>Recently watched</h3>
+                                </div>
+                            </div>
+                            <div id='user-recently-watched' class='dashboard-recent-media-row'>
+                                {{ include(
+                                    'PWWContentBundle:user:recentlywatched.html.twig',
+                                    { 'recentlyWatched': recentlyWatched }
+                                ) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

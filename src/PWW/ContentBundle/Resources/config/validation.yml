@@ -1,0 +1,4 @@
+PWW\ContentBundle\Entity\Settings:
+    properties:
+        updaterPath:
+            - Url: ~

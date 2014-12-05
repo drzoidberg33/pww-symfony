@@ -1,0 +1,35 @@
+PWW\DataFactoryBundle\Entity\Config:
+    type: entity
+    table: config
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        version:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        json:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        jsonPretty:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: json_pretty
+        hashRef:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: hash_ref
+    lifecycleCallbacks: {  }

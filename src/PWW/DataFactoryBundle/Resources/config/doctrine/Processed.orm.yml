@@ -1,0 +1,144 @@
+PWW\DataFactoryBundle\Entity\Processed:
+    type: entity
+    repositoryClass: PWW\DataFactoryBundle\Repository\HelperRepository
+    table: processed
+    indexes:
+        userIdx:
+            columns:
+                - user
+        timeIdx:
+            columns:
+                - time
+        stoppedIdx:
+            columns:
+                - stopped
+        notifiedIdx:
+            columns:
+                - notified
+        ratingKeyIdx:
+            columns:
+                - ratingKey
+        parentRatingKeyIdx:
+            columns:
+                - parentRatingKey
+        grandparentRatingKeyIdx:
+            columns:
+                - grandparentRatingKey
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        sessionId:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: session_id
+        user:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        platform:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        title:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        origTitle:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: orig_title
+        origTitleEp:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: orig_title_ep
+        episode:
+            type: integer
+            nullable: true
+            unsigned: false
+        season:
+            type: integer
+            nullable: true
+            unsigned: false
+        year:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        rating:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        genre:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        summary:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        notified:
+            type: integer
+            nullable: true
+            unsigned: false
+        pausedCounter:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: paused_counter
+        xml:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        ipAddress:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            column: ip_address
+        ratingkey:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: ratingKey
+        parentratingkey:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: parentRatingKey
+        grandparentratingkey:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: grandparentRatingKey
+        time:
+            type: integer
+            nullable: true
+            unsigned: false
+        stopped:
+            type: integer
+            nullable: true
+            unsigned: false
+        paused:
+            type: integer
+            nullable: true
+            unsigned: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,11 @@
+pww_content:
+    resource: "@PWWContentBundle/Resources/config/routing.yml"
+
+pww_data_factory:
+    resource: "@PWWDataFactoryBundle/Resources/config/routing.yml"
+    prefix:   /api
+    type: rest
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

@@ -1,0 +1,98 @@
+<div class='wellheader'>
+    <div class='dashboard-wellheader'>
+        {% if xml.playCount > 0 %}
+            <h3>Current Activity <strong>{{ xml.playCount }}</strong> user(s)</h3>
+        {% else %}
+            <h3>Current Activity</h3>
+        {% endif %}
+    </div>
+</div>
+{% if xml.playCount == 0 %}
+    <h5><strong>Nothing is currently being watched.</strong></h5><br>
+{% else %}
+    {% for type in xml %}
+        {% for element in type %}
+            <div class='instance'>
+                {% if element.type == 'track' %}
+                    <div class='poster'>
+                        <div class='dashboard-activity-poster-face'>
+                            <div class='art-music-face' style='background-image:url(img?img={{ element.art }})'></div>
+                        </div>
+                {% else %}
+                    <div class='poster'>
+                        {% if element.indexes == 'sd' and element.state == 'playing' %}
+                            <div class='dashboard-activity-poster-face'>
+                                <a href='info/{{ element.ratingKey }}'><img class='hidden' id='thumb-img-{{ element.sessionKey }}' src='img?img={{ element.thumb }}'></img></a>
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#thumb-img-{{ element.sessionKey }}').fadeIn(1000).removeClass('hidden');
+                                });
+                            </script>
+                        {% else %}
+                            <div class='dashboard-activity-poster-face'>
+                                <a href='info/{{ element.ratingKey }}'><img id='thumb-img-{{ element.sessionKey }}' src='img?img={{ element.thumb }}'></img></a>
+                            </div>
+                        {% endif %}
+                {% endif %}
+                    <div class='dashboard-activity-metadata-wrapper'>
+                        <div class='dashboard-activity-instance-overlay'>
+                            <div class='dashboard-activity-metadata-progress-minutes'>
+                                <div class='progress progress-warning'>
+                                    <div class='bar' style='width: {{ element.progress|round(0,'ceil') }}%'>
+                                        {{ element.progress|round(0,'ceil') }}%
+                                    </div>
+                                </div>												
+                            </div>
+                            <div class='dashboard-activity-metadata-platform'>
+                                <img src='{{ asset('bundles/pwwcontent/images/platforms/' ~ element.platform|getlogo) }}'></>
+                            </div>
+                            <div class='dashboard-activity-metadata-user'>
+                                <a href='user/{{ element.user|url_encode }}'>{{ element.user }}</a>
+                            </div>
+                            <div class='dashboard-activity-metadata-title'>
+                                {% if element.type == 'track' %}
+                                    <span>{{ element.grandparentTitle }} - {{ element.title }}</span>
+                                {% elseif element.type == 'episode' %}
+                                    <a href='info/{{ element.ratingKey }}'>{{ element.grandparentTitle }} - {{ element.title }}</a>
+                                {% else %}
+                                    <a href='info/{{ element.ratingKey }}'>{{ element.title }}</a>
+                                {% endif %}
+                            </div>		
+                        </div>
+
+                        <div id='infoDetails-{{ element.sessionKey }}' class='collapse out'>
+                            <div class='dashboard-activity-info-details-overlay'>
+                                <div class='dashboard-activity-info-details-content'>
+                                    {% if element.videoDecision is defined %}
+                                        State: <strong>{{ element.state|capitalize }}</strong>
+                                        <br>
+                                        Stream: <strong>{{ element.videoDecision|capitalize }}</strong>
+                                        <br>
+                                        Video: <strong>{{ element.videoDecision|capitalize }} ({{ element.videoCodec }} {{ element.width }}x{{ element.height }})</strong>
+                                        <br>
+                                        Audio: <strong>{{ element.audioDecision|capitalize }} ({{ element.audioCodec }} {{ element.audioChannels }}ch)</strong>
+                                    {% elseif element.type == 'track' %}
+                                        Artist: <strong>{{ element.grandparentTitle }}</strong>
+                                        <br>
+                                        Album: <strong>{{ element.parentTitle }}</strong>
+                                        <br>
+                                        State: <strong>{{ element.state|capitalize }}</strong>
+                                        <br>
+                                        Stream: <strong>{{ element.audioDecision|capitalize }}</strong>
+                                        <br>
+                                        Audio: <strong>{{ element.audioDecision|capitalize }} ({{ element.audioCodec }} {{ element.audioChannels }}ch)</strong>
+                                    {% endif %}    
+                                </div>
+                            </div>
+                        </div>	
+                    </div>
+                </div>
+                <div class='dashboard-activity-button-info'>
+                    <button type='button' id='btn-info-{{ element.sessionKey }}' class='btn btn-warning' data-toggle='collapse' data-target='#infoDetails-{{ element.sessionKey }}'><i class='icon-info-sign icon-white'></i></button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+</div>

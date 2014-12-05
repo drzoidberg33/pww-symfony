@@ -1,0 +1,184 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="clear"></div>
+    <div class='container-fluid'>
+        {% if xml is defined and xml.metadata|length > 0 %}
+        <div class='row-fluid'>
+            <div class='span12'>           
+            {% if xml.metadata.art != '' %}
+                <div class='art-face' style='background-image:url(../img?img={{ xml.metadata.art }})'>
+            {% else %}
+                <div class='art-face'>
+            {% endif %}
+                    <div class='summary-wrapper'>
+                        <div class='summary-overlay'>
+                            <div class='row-fluid'>
+                                <div class='span9'>
+                                    <div class='summary-content-poster hidden-phone hidden-tablet'>
+                                        {% if xml.metadata.thumb != '' %}
+                                            {% if xml.metadata.type == 'episode' %}
+                                                <img src='../img?img={{ xml.parent.thumb }}'></img>
+                                            {% else %}
+                                                <img src='../img?img={{ xml.metadata.thumb }}'></img>
+                                            {% endif %}
+                                        {% else %}
+                                            <img src='images/poster.png'></img>
+                                        {% endif %}
+                                    </div>
+                                    <div class='summary-content'>
+                                        {% if xml.metadata.type == 'season' %}
+                                            <div class='summary-content-title'>
+                                                <h1><a href='{{ xml.metadata.parentRatingKey }}'>{{ xml.metadata.parentTitle }}</a> ({{ xml.metadata.title }})</h1>
+                                            </div>
+                                            <div class='summary-content-details-wrapper'>
+                                                <div class='summary-content-director'>
+                                                    Studio <strong>{{ xml.parent.studio }}</strong>
+                                                </div>
+                                                <div class='summary-content-duration'>
+                                                    Runtime <strong>{{ xml.parent.duration // 60000 }} mins</strong>
+                                                </div>
+                                                <div class='summary-content-content-rating'>
+                                                    Rated <strong>{{ xml.parent.contentRating }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class='summary-content-summary'>
+                                                <p>{{ xml.parent.summary }}</p>
+                                            </div>
+                                        {% elseif xml.metadata.type == 'movie' %}
+                                            <div class='summary-content-title'>
+                                                <h1>{{ xml.metadata.title }} ({{ xml.metadata.year }})</h1>
+                                            </div>
+                                            <div class='rateit hidden-phone hidden-tablet'  data-rateit-value='{{ xml.metadata.rating // 2 }}' data-rateit-ispreset='true' data-rateit-readonly='true'></div>
+                                            <div class='summary-content-details-wrapper'>
+                                                <div class='summary-content-director'>
+                                                    Directed by <strong>{{ xml.metadata.director }}</strong>
+                                                </div>
+                                                <div class='summary-content-duration'>
+                                                    Runtime <strong>{{ xml.metadata.duration // 60000 }} mins</strong>
+                                                </div>
+                                                <div class='summary-content-content-rating'>
+                                                    Rated <strong>{{ xml.metadata.contentRating }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class='summary-content-summary'>
+                                                <p>{{ xml.metadata.summary }}</p>
+                                            </div>
+                                        {% elseif xml.metadata.type == 'episode' %}
+                                            <div class='summary-content-title'>
+                                                <h1>{{ xml.metadata.grandparentTitle }} (Season {{ xml.metadata.parentIndex }}, Episode {{ xml.metadata.index }}) "{{ xml.metadata.title }}"</h1>
+                                            </div>
+                                            <div class='summary-content-details-wrapper'>
+                                                <div class='summary-content-director'>
+                                                    Directed by <strong>{{ xml.metadata.director }}</strong>
+                                                </div>
+                                                <div class='summary-content-duration'>
+                                                    Runtime <strong>{{ xml.metadata.duration // 60000 }} mins</strong>
+                                                </div>
+                                                <div class='summary-content-content-rating'>
+                                                    Rated <strong>{{ xml.metadata.contentRating }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class='summary-content-summary'>
+                                                <p>{{ xml.metadata.summary }}</p>
+                                            </div>
+                                        {% elseif xml.metadata.type == 'show' %}
+                                            <div class='summary-content-title'>
+                                                <h1>{{ xml.metadata.title }} ({{ xml.metadata.year }})</h1>
+                                            </div>
+                                            <div class='rateit hidden-phone hidden-tablet'  data-rateit-value='{{ xml.metadata.rating // 2 }}' data-rateit-ispreset='true' data-rateit-readonly='true'></div>
+                                            <div class='summary-content-details-wrapper'>
+                                                <div class='summary-content-director'>
+                                                    Studio <strong>{{ xml.metadata.studio }}</strong>
+                                                </div>
+                                                <div class='summary-content-duration'>
+                                                    Runtime <strong>{{ xml.metadata.duration // 60000 }} mins</strong>
+                                                </div>
+                                                <div class='summary-content-content-rating'>
+                                                    Rated <strong>{{ xml.metadata.contentRating }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class='summary-content-summary'>
+                                                <p>{{ xml.metadata.summary }}</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% if xml.metadata.type == 'movie' or xml.metadata.type == 'show' %}
+                                    <div class='span3'>
+                                        <div class='summary-content-people-wrapper hidden-phone hidden-tablet'>
+                                            <div class='summary-content-actors'>
+                                                <h6><strong>Genres</strong></h6>
+                                                <ul>
+                                                    {% for genre in xml.metadata.genres|slice(0, 5) %}
+                                                        <li>{{ genre }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class='summary-content-actors'>
+                                                <h6><strong>Starring</strong></h6>
+                                                <ul>
+                                                    {% for actor in xml.metadata.cast|slice(0, 5) %}
+                                                        <li>{{ actor }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elseif xml.metadata.type == 'episode' %}
+                                    <div class='span3'>
+                                        <div class='summary-content-people-wrapper hidden-phone hidden-tablet'>
+                                            <div class='summary-content-actors'>
+                                                <h6><strong>Written by</strong></h6>
+                                                <ul>
+                                                    {% for writer in xml.metadata.writers|slice(0, 5) %}
+                                                        <li>{{ writer }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>	
+        </div>	
+    </div>
+    <div class='container-fluid'>
+        <div class='clear'></div>
+        <div class='row-fluid'>
+            <div class='span12'>
+                <div class='wellbg'>
+                    {% if xml.metadata.type == 'season' %}
+                        {{ include(
+                            'PWWContentBundle:info:episodelist.html.twig',
+                            { 'episodes': xml.children, 'season': xml.metadata.index }
+                        ) }}
+                    {% elseif xml.metadata.type == 'show' %}
+                        {{ include(
+                            'PWWContentBundle:info:mostwatched.html.twig',
+                            { 'mostWatched': mostWatched, 'showTitle': xml.metadata.title }
+                        ) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class='clear'></div>
+        <div class='row-fluid'>
+            <div class='span12'>
+                <div class='wellbg'>
+                    <h5><strong>Item does not exist.</strong></h5><br>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/pwwcontent/js/jquery.rateit.js') }}"></script>
+{% endblock %}

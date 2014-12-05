@@ -1,0 +1,20 @@
+<ul>
+    <div class='user-overview-stats-instance'>
+        {% for item in stats %}
+            <li>
+                <div class='user-overview-stats-instance-text'>
+                    <h4>{{ item.title }}</h4>
+                    <h3>{{ item.stats.totalPlays }}</h3><p>plays</p>
+                    <h1> / </h1>
+                    {% if item.stats.totalTime >= 86400 %}
+                        <h3>{{ item.stats.totalTime|friendlytime.days}}</h3> <p>days </p>
+                    {% endif %}
+                    {% if item.stats.totalTime >= 1440 %}
+                        <h3>{{ item.stats.totalTime|friendlytime.hours}}</h3> <p>hrs </p>
+                    {% endif %}
+                    <h3>{{ item.stats.totalTime|friendlytime.minutes}}</h3> <p>mins</p>
+                </div>
+            </li>
+        {% endfor %}
+    </div>
+</ul>

@@ -1,0 +1,30 @@
+<div class='wellheader'>
+    <div class='dashboard-wellheader'>
+        <h3>Season {{ season }}</h3>
+    </div>
+</div>
+
+<div class='season-episodes-wrapper'>
+    <ul class='season-episodes-instance'>
+        {% for episode in episodes %}
+        <li>
+            <div class='season-episodes-poster'>
+                <div class='season-episodes-poster-face'>
+                    <a href='{{ episode.ratingKey }}'><img src='../img?img={{ episode.thumb }}' class='season-episodes-poster-face'></img></a>
+                </div>
+                <div class='season-episodes-card-overlay'>
+                    <div class='season-episodes-season'>
+                        Episode {{ episode.index }}
+                    </div>
+                </div>
+            </div>
+            <div class='season-episodes-instance-text-wrapper'>
+                 <div class='season-episodes-title'>
+                    <a href='{{ episode.ratingKey }}'>"{{ episode.title }}"</a>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+        

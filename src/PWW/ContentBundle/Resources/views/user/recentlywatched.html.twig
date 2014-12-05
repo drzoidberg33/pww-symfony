@@ -1,0 +1,29 @@
+{% if recentlyWatched is defined and recentlyWatched|length > 0 %}
+    {% for watched in recentlyWatched %}
+        {% if watched.metadata|length > 0 %}
+            <ul class='dashboard-recent-media'>
+                <div class='dashboard-recent-media-instance'>
+                    <li>
+                        <div class='poster'>
+                            <div class='poster-face'>
+                                {% if watched.metadata.type == 'movie' %}
+                                    <a href='../info/{{ watched.metadata.ratingKey }}'><img src='../img?img={{ watched.metadata.thumb }}' class='poster-face'></img></a>
+                                    <div class=dashboard-recent-media-metacontainer>
+                                        <h3>{{ watched.metadata.title }}</h3>
+                                    </div>
+                                {% elseif watched.metadata.type == 'episode' %}
+                                    <a href='../info/{{ watched.metadata.ratingKey }}'><img src='../img?img={{ watched.parent.thumb }}' class='poster-face'></img></a>
+                                    <div class=dashboard-recent-media-metacontainer>
+                                        <h3>Season {{ watched.metadata.parentIndex }}, Episode {{ watched.metadata.index }}</h3>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h5><strong>There are no recent items.</strong></h5><br>
+{% endif %}

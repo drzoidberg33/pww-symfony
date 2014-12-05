@@ -1,0 +1,98 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class='row-fluid'>
+        <div class='span12'>
+
+        </div>
+    </div>
+</div>
+{% if top10 is defined %}
+    
+<div class="container-fluid">
+    <div class='row-fluid'>
+        <div class="span12">
+            <div class='wellheader'>
+                <div class='dashboard-wellheader-no-chevron'>
+                    <h2><i class="icon-large icon-bar-chart icon-white"></i> Charts</h2>
+                </div>
+            </div>	
+        </div>
+    </div>
+
+    <div class='row-fluid'>	
+        <div class="span12">
+            {% for column in top10 %}
+            <div class='span3'>
+                <div class='wellbg'>
+                    <div class='wellheader'>
+                        <div class='dashboard-wellheader'>
+                            <h4>Top 10 {{ column.0.section }} (All Time)</h4>
+                        </div>
+                    </div>
+                    {% for item in column %}
+                        {% if item.section != 'Shows' %}
+                    <div class='charts-wrapper'>
+                        <ul>
+                            <div class='charts-instance-wrapper'>
+                                <div class='charts-instance-position-circle'><h1>{{ loop.index }}</h1></div>
+                                {% if item.type == 'movie' %}
+                                    <div class='charts-instance-poster'>
+                                        {% if item.metadata.thumb is defined %}
+                                            <img src='../img?img={{ item.metadata.thumb }}'></img>
+                                        {% else %}
+                                            <img src='../img?img=blank.jpg'></img>
+                                        {% endif %}
+                                    </div>
+                                    <div class='charts-instance-position-title'>
+                                        <li>
+                                            <h3><a href='../info/{{ item.ratingKey }}'>{{ item.origTitle }} ({{ item.year }})</a></h3>
+                                            <h5>({{ item.playCount }} views)</h5>
+                                        </li>
+                                    </div>
+                                {% elseif item.type == 'episode' %}
+                                    <div class='charts-instance-poster'>
+                                        <img src='../img?img={{ item.parent.thumb }}'></img>
+                                    </div>
+                                    <div class='charts-instance-position-title'>
+                                        <li>
+                                            <h3><a href='../info/{{ item.ratingKey }}'>{{ item.origTitle }} - Season {{ item.season }}, Episode {{ item.episode }}</a></h3>
+                                            <h5>({{ item.playCount }} views)</h5>
+                                        </li>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </div>
+                            {% elseif item.section == 'Shows' %}
+                                <div class='charts-wrapper'>
+                        <ul>
+                            <div class='charts-instance-wrapper'>
+                                <div class='charts-instance-position-circle'><h1>{{ loop.index }}</h1></div>
+                                
+                                    <div class='charts-instance-poster'>
+                                        <img src='../img?img={{ item.parent.thumb }}'></img>
+                                    </div>
+                                    <div class='charts-instance-position-title'>
+                                        <li>
+                                            <h3><a href='../info/{{ item.metadata.grandparentRatingKey }}'>{{ item.origTitle }}</a></h3>
+                                            <h5>({{ item.playCount }} views)</h5>
+                                        </li>
+                                    </div>
+                                
+                            </div>
+                        </ul>
+                    </div>
+                            {% endif %}
+                    {% endfor %}
+                </div>
+            </div>        
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+{% endif %}
+
+{% endblock %}

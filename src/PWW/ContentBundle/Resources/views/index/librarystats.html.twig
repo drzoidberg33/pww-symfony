@@ -1,0 +1,15 @@
+{% if xml is defined and xml|length > 0 %}
+    <div id='library-stats' class='stats'>
+        <ul>
+            {% for key, item in xml %}
+                <li><h1>{{ item.titleCount|e }}</h1><h5>{{ key }}</h5></li>
+                {% if item.episodeCount is defined %}
+                    <li><h1>{{ item.episodeCount|e }}</h1><h5>TV Episodes</h5></li>
+                {% endif %}
+            {% endfor %}
+            <li><h1>{{ users|e }}</h1><h5>Users</h5></li>
+        </ul> 
+    </div>
+{% else %}
+    <h5><strong>No statistics to report.</strong></h5><br>
+{% endif %}

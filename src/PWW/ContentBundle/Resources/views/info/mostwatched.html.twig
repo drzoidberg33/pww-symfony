@@ -1,0 +1,36 @@
+<div class='wellheader'>
+    <h3>The most watched episodes of <strong>{{ showTitle }}</strong> are</h3>
+</div>
+{% if mostWatched is defined and mostWatched|length > 0 %}
+    {% for most in mostWatched %}
+        <div class='info-top-watched-wrapper'>
+            <ul class='info-top-watched-instance'>
+                <li>
+                    <div class='info-top-watched-instance-position-circle'>
+                        <h1>{{ loop.index }}</h1>
+                    </div>
+                    <div class='info-top-watched-poster'>
+                        <div class='info-top-watched-poster-face'>
+                            <a href='../info/{{ most.metadata.ratingKey }}'><img src='../img?img={{ most.metadata.thumb }}' class='info-top-watched-poster-face'></img></a>
+                        </div>
+                        <div class='info-top-watch-card-overlay'>
+                            <div class='info-top-watched-season'>
+                                Season {{ most.metadata.parentIndex }}, Episode {{ most.metadata.index }}
+                            </div>
+                            <div class='info-top-watched-playcount'>
+                                <strong>{{ most.playCount }}</strong> views
+                            </div>
+                        </div>
+                    </div>
+                    <div class='info-top-watched-instance-text-wrapper'>
+                        <div class='info-top-watched-title'>
+                            <a href='../info/{{ most.metadata.ratingKey }}'>"{{ most.metadata.title }}"</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+{% else %}
+    <h5><strong>There are no watched items.</strong></h5><br>
+{% endif %}

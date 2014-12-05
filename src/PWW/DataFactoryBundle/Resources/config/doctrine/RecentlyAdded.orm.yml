@@ -1,0 +1,67 @@
+PWW\DataFactoryBundle\Entity\RecentlyAdded:
+    type: entity
+    table: recently_added
+    id:
+        itemId:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            id: true
+            column: item_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        debug:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+        file:
+            type: integer
+            nullable: true
+            unsigned: false
+        twitter:
+            type: integer
+            nullable: true
+            unsigned: false
+        growl:
+            type: integer
+            nullable: true
+            unsigned: false
+        prowl:
+            type: integer
+            nullable: true
+            unsigned: false
+        gntp:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: GNTP
+        email:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: EMAIL
+        pushover:
+            type: integer
+            nullable: true
+            unsigned: false
+        boxcar:
+            type: integer
+            nullable: true
+            unsigned: false
+        boxcarV2:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: boxcar_v2
+        pushbullet:
+            type: integer
+            nullable: true
+            unsigned: false
+        time:
+            type: integer
+            nullable: true
+            unsigned: false
+    lifecycleCallbacks: {  }

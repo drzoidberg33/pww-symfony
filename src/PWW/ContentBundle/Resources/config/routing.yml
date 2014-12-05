@@ -1,0 +1,47 @@
+pww_content_homepage:
+    path:     /
+    defaults: { _controller: PWWContentBundle:Default:index }
+    
+pww_content_img:
+    path:     /img
+    defaults: { _controller: PWWContentBundle:Image:img }
+
+pww_content_refresh_stats:
+    path:   /refresh/stats
+    defaults: { _controller: PWWContentBundle:Refresh:stats }
+    
+pww_content_refresh_activity:
+    path:   /refresh/activity
+    defaults: { _controller: PWWContentBundle:Refresh:activity }
+
+pww_content_refresh_recent:
+    path:   /refresh/recent
+    defaults: { _controller: PWWContentBundle:Refresh:recent }
+
+pww_content_settings:
+    path:   /settings
+    defaults: { _controller: PWWContentBundle:Default:settings }
+    
+pww_content_history:
+    path:   /history
+    defaults: { _controller: PWWContentBundle:Default:history }
+
+pww_content_stats:
+    path:   /stats
+    defaults: { _controller: PWWContentBundle:Default:stats }
+    
+pww_content_users:
+    path:   /users
+    defaults: { _controller: PWWContentBundle:Default:users }
+
+pww_content_charts:
+    path:   /charts
+    defaults: { _controller: PWWContentBundle:Default:charts }
+    
+pww_content_info:
+    path:   /info/{entity}
+    defaults: { _controller: PWWContentBundle:Default:info }
+    
+pww_content_user:
+    path:   /user/{entity}
+    defaults: { _controller: PWWContentBundle:Default:user }

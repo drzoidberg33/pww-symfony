@@ -1,0 +1,20 @@
+{% if platformStats is defined and platformStats|length > 0 %}
+    {% for platform in platformStats %}
+        <ul>
+            <div class='user-platforms-instance'>
+                <li>
+                    <img class='user-platforms-instance-poster' src='{{ asset('bundles/pwwcontent/images/platforms/' ~ platform.platform|getlogo) }}'/>
+                    <div class='user-platforms-instance-name'>
+                        {{ platform.platformName }}
+                    </div>
+                    <div class='user-platforms-instance-playcount'>
+                        <h3>{{ platform.playCount }}</h3>
+                        <p> plays</p>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    {% endfor %}
+{% else %}
+    <h5><strong>No statistics to report.</strong></h5><br>
+{% endif %}

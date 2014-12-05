@@ -1,0 +1,14 @@
+main:
+    dateFormat: "YYYY-MM-DD"
+    timeFormat: "hh:mm a"
+    pmsIp: 127.0.0.1
+    pmsHttpPort: 32400
+    pmsHttpsPort: 32443
+    https: false
+    plexWatchDb: "/opt/plexWatch/plexWatch-dev.db"
+    myPlexUser: "drzoidberg33"
+    myPlexPass: "nofx88"
+    myPlexToken: "C8WzDK7Ckh1nscqSpYiq"
+    globalHistoryGrouping: false
+    userHistoryGrouping: false
+    chartsGrouping: true
